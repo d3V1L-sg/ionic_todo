@@ -1,0 +1,48 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Hello</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item *ngFor="let p of appPages" (click)="openPage(p)">
+        <ion-icon item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>
+        {{p.title}}
+      </button>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        Direction
+      </ion-list-header>
+      <button ion-item menuClose (click)="changeDirection()">
+        <ion-icon item-left>
+          <i class="fa fa-map-signs"></i>
+        </ion-icon>
+        Change Direction
+      </button>
+    </ion-list>
+
+
+    <ion-list>
+      <ion-list-header>
+        Maps
+      </ion-list-header>
+      <button ion-item menuClose (click)="openMaps()">
+        <ion-icon item-left>
+          <ion-icon name="navigate"></ion-icon>
+        </ion-icon>
+        Locate Me
+      </button>
+    </ion-list>
+
+
+  </ion-content>
+
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
