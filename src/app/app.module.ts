@@ -9,6 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '../providers/storage';
 import { Vibration } from '@ionic-native/vibration';
 import { NativeAudio } from '@ionic-native/native-audio';
+import { Firebase } from '@ionic-native/firebase';
 
 import {
   GoogleMaps
@@ -36,6 +37,7 @@ import { HomeModule } from "../pages/home/home.module";
     Vibration,
     NativeAudio,
     GoogleMaps,
+    Firebase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "914519248413",
+    "firebase_url": "https://instant-shard-166708.firebaseio.com",
+    "project_id": "instant-shard-166708",
+    "storage_bucket": "instant-shard-166708.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914519248413:android:33f4c4d2274b4ef6",
+        "android_client_info": {
+          "package_name": "com.shyam.todo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914519248413-1vn70f05s93vksao189r4e6rj2t9rf1a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQajT8QFuvHCz4PYxHXCTdXeelnHTglLk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,12 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import {Component, ViewChild} from '@angular/core';
+import {Nav, Platform} from 'ionic-angular';
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { Pending } from '../pages/pending/pending';
-import { Completed } from '../pages/completed/completed';
-import { Maps } from '../pages/maps/maps';
+import {HomePage} from '../pages/home/home';
+import {Pending} from '../pages/pending/pending';
+import {Completed} from '../pages/completed/completed';
+import {Maps} from '../pages/maps/maps';
+import {Firebase} from '@ionic-native/firebase';
 
 
 export interface PageInterface {
@@ -32,17 +33,17 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   appPages: PageInterface[] = [
-    { title: 'Pending', name: 'Home', component: HomePage, tabComponent: Pending, index: 0, icon: 'calendar' },
-    { title: 'Completed', name: 'Home', component: HomePage, tabComponent: Completed, index: 1, icon: 'done-all' }
+    {title: 'Pending', name: 'Home', component: HomePage, tabComponent: Pending, index: 0, icon: 'calendar'},
+    {title: 'Completed', name: 'Home', component: HomePage, tabComponent: Completed, index: 1, icon: 'done-all'}
   ];
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public firebase: Firebase) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Pending', component: Pending },
-      { title: 'Completed', component: Completed }
+      {title: 'Pending', component: Pending},
+      {title: 'Completed', component: Completed}
     ];
 
   }
@@ -53,11 +54,28 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.firebase.onTokenRefresh()
+        .subscribe((token: string) => console.log(`Got a new token ${token}`));
+
+      this.getToken();
+
     });
   }
 
-  changeDirection () {
-    if(this.platform.dir() == 'ltr') {
+  getToken() {
+    this.firebase.getToken()
+      .then(token => {
+        if (!token) {
+          console.log(`The token is ${token} err`)
+        } else {
+          console.log(`The token is ${token}`)
+        }
+      });// save the token server-side and use it to push notifications to this device
+  }
+
+  changeDirection() {
+    if (this.platform.dir() == 'ltr') {
       this.platform.setDir('rtl', true);
     } else {
       this.platform.setDir('ltr', true);
@@ -71,7 +89,7 @@ export class MyApp {
     // setRoot on the nav to remove previous pages and only have this page
     // we wouldn't want the back button to show in this scenario
     if (page.index) {
-      params = { tabIndex: page.index };
+      params = {tabIndex: page.index};
     }
 
     // If we are already on tabs just change the selected tab
@@ -104,7 +122,7 @@ export class MyApp {
     return;
   }
 
-  openMaps () {
+  openMaps() {
     this.nav.push(Maps);
   }
 }
